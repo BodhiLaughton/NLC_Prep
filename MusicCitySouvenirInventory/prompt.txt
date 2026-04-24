@@ -1,0 +1,59 @@
+(335) C++ PROGRAMMING – NATIONAL LEVEL
+NLC 2026 PRODUCTION TASK: "Music City Souvenir Inventory"
+
+TIME: 90 Minutes
+POINTS: 100
+
+PROBLEM SCENARIO:
+You are building an inventory management and reporting system for a souvenir shop in Nashville. The program must accept new inventory items from the user, allow the user to search for a specific item, and finally output a formatted, sorted inventory report to a text file.
+
+SPECIFICATIONS:
+
+PART 1: CLASS REQUIREMENTS
+Create a class named `Item` with the following:
+- Private Members: `itemID` (int), `itemName` (string), `price` (double), and `quantity` (int).
+- A Constructor to initialize all member variables.
+- Public Getters for all private members.
+- A public method `getTotalValue()` that calculates and returns the total inventory value of the item (price * quantity).
+
+PART 2: USER INPUT & VALIDATION (The Data Entry Loop)
+The program must prompt the user to enter inventory items using a loop. You must validate the input and prevent infinite loops/crashes if the wrong data type is entered.
+- Item ID: Must be exactly 5 digits (between 10000 and 99999). 
+  - If invalid, display: "Error: Item ID must be 5 digits." and reprompt.
+- Item Name: Cannot be empty. Allow spaces (e.g., "Cowboy Hat").
+  - If invalid, display: "Error: Name cannot be blank." and reprompt.
+- Price: Must be a positive number greater than 0.
+  - If invalid, display: "Error: Price must be greater than 0." and reprompt.
+- Quantity: Must be 0 or greater (cannot be negative).
+  - If invalid, display: "Error: Quantity cannot be negative." and reprompt.
+
+After a successful entry, ask: "Would you like to add another item? (Y/N): "
+(Ensure this only accepts Y, y, N, or n). Store valid objects in a std::vector.
+
+PART 3: THE SEARCH FEATURE
+Once the user finishes adding items (selects 'N'), the program must ask:
+"Enter an Item ID to search for: "
+- Validate that the user enters an integer.
+- Search the vector for the matching ID.
+- If found, print to the console: "Item Found: [Item Name] - [Quantity] in stock at $[Price]"
+- If not found, print to the console: "Notice: Item ID not found in current inventory."
+
+PART 4: SORTING & FILE OUTPUT
+Sort the vector of items in DESCENDING order based on their Total Value (Highest value at the top, lowest at the bottom).
+
+Write the sorted data to a file named `inventory_report.txt`.
+Format the output clearly. Example:
+ID    | Name                 | Qty | Price  | Total Value
+---------------------------------------------------------
+10002 | Leather Boots        | 10  | $85.00 | $850.00
+10001 | Nashville Keychain   | 50  | $5.00  | $250.00
+
+At the bottom of the file, print:
+"Total Store Inventory Value: $[Sum of all Total Values]"
+
+SCORING RUBRIC:
+Input Validation (25pts): Correctly handles invalid data types and logic boundaries without crashing.
+OOP Implementation (20pts): Class structure, encapsulation, and method usage.
+Search Logic (15pts): Correctly locates and displays an item from the vector.
+Sorting Logic (20pts): Correctly sorts the vector by descending total value before file writing.
+File I/O & Formatting (20pts): Accurate math, clean alignment, and proper file handling.

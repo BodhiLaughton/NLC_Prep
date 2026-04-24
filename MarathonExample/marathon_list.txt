@@ -1,0 +1,5 @@
+4217 | tester | 18 | Young Adult | 120574.00
+5215 | timothy2 | 42 | Adult | 40125.00
+
+Total Fees Collected: 160699.00
+Average Age of all runners: 30.00

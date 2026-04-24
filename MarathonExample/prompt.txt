@@ -1,0 +1,40 @@
+(335) C++ PROGRAMMING – NATIONAL LEVEL
+NLC 2026 PRODUCTION TASK: "Nashville Music City Marathon"
+
+TIME: 90 Minutes
+POINTS: 100
+
+PROBLEM SCENARIO:
+You are developing a registration system for the Music City Marathon. The program must accept runner data from the console, validate it based on strict criteria, and save only valid registrations to a file.
+
+SPECIFICATIONS:
+
+    USER INPUT & VALIDATION:
+    The program must prompt the user to enter the following data for a runner. You must use a while loop or a validation function to ensure the data meets these requirements:
+    Runner Name: Cannot be empty.
+    Age: Must be an integer between 18 and 99 (inclusive). If the user enters a string or an out-of-range number, display Error: Invalid Age. Must be a number between 18-99. and prompt again.
+    Bib Number: Must be exactly 4 digits (1000–9999). If invalid, display Error: Bib must be 4 digits. and prompt again.
+    Registration Fee: Must be a positive double.
+
+    CLASS REQUIREMENTS:
+    Create a class Runner with private members.
+    Use a Constructor to initialize the object.
+    Include a method getCategory() that returns a string:
+    "Young Adult" (18–34)
+    "Adult" (35–50)
+    "Senior" (51+)
+
+PROCESSING:
+The program should ask the user: "Would you like to add another runner? (Y/N)".
+Store all valid Runner objects in a std::vector.
+FILE OUTPUT (marathon_list.txt):
+Write all registered runners to a file.
+Format: Bib# | Name | Age | Category | Fee
+At the end of the file, print the Total Fees Collected and the Average Age of all runners.
+
+SCORING RUBRIC (Special Focus):
+Input Validation (30pts): Does the program effectively reject non-numeric input for Age/Fee without crashing? Does it loop until valid data is entered?
+OOP Implementation (20pts): Use of class, constructor, and logic methods.
+Logic Accuracy (20pts): Correct categorization of runners and math for averages/totals.
+File I/O (20pts): Proper file creation and clean formatting.
+Style (10pts): Header comments and intuitive user prompts.
