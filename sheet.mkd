@@ -1,0 +1,381 @@
+# C++ CHEAT SHEET
+
+```cpp
+// todo: error logging
+// todo: how to return arrays from functions
+// todo: cpp built in sorting algorithm
+// todo: how to format string and <iomanip>
+// todo: I/O for txt and csv files
+// todo: extending classes
+// todo: thought process for speed
+// todo: fill in contestant id in quickstart
+```
+
+
+## QUICK START
+```cpp
+// Contestant ID: #00000000
+// Event: (335) C++ Programming 
+
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+#include <cstring>
+#include <ctime>
+#include <vector>
+#include <algorithm>
+#include <functional>
+#include <cctype>
+
+using namespace std;
+
+int main() {
+    return 0;
+}
+```
+
+
+## HOW TO GET VALID DOUBLE USER INPUT
+```cpp
+double val;
+bool err = false;
+while (true) {
+    cout << (err ? "errPrompt" : "prompt");
+
+    if (cin >> val && val >= 0) {
+        return val;
+    }
+
+    err = true;
+    cin.clear();
+    cin.ignore(1000, '\n');
+}
+```
+
+```cpp
+double val;
+while (true) {
+    cout << "prompt";
+
+    if (cin >> val && val >= 0) {
+        return val;
+    }
+
+    cout << "errMsg" << "\n";
+    cin.clear();
+    cin.ignore(1000, '\n');
+}
+```
+
+
+## HOW TO GET VALID STRING USER INPUT
+```cpp
+string val;
+bool err = false;
+while (true) {
+    cout << (err ? "errPrompt" : "prompt");
+
+    if (getline(cin >> ws, val) && !val.empty()) {
+        return val;
+    }
+
+    err = true;
+}
+```
+
+```cpp
+string val;
+while (true) {
+    cout << "prompt";
+
+    if (getline(cin >> ws, val) && !val.empty()) {
+        return value;
+    }
+
+    cout << "errMsg" << "\n"; 
+}
+```
+
+
+## HOW TO MAKE A CLASS
+```cpp
+class Runner {
+    public:
+        Runner(string name, int age, int bib, double registrationFee) {
+            this->name = name;
+            this->age = age;
+            this->bib = bib;
+            this->registrationFee = registrationFee;
+        }
+
+        string getName() {
+            return name;
+        }
+
+        int getAge() {
+            return age;
+        }
+
+        int getBib() {
+            return bib;
+        }
+
+        double getRegistrationFee() {
+            return registrationFee;
+        }
+
+        string getCategory() {
+            if (age >= 51) {
+                return "Senior";
+            } else if (age >= 35) {
+                return "Adult";
+            } else {
+                return "Young Adult";
+            }
+        }
+
+    private:
+        string name;
+        int age;
+        int bib;
+        double registrationFee;
+};
+```
+
+
+## HOW TO USE BASICS
+```cpp
+system("CLS"); // clear screen
+system("PAUSE"); // pause
+
+cout << "printed message";
+
+cin >> inputVarible;
+getline(cin, inputVarible); // only for strings, includes spaces while cin does not
+
+bool isEvenNumber(int number); // prototype
+
+switch (expression) {
+  case 1:
+    break; // need breaks
+  case 2:
+    break;
+  default:
+    break;
+}
+```
+
+
+## HOW TO USE VECTORS
+```cpp
+vector<int> myVector;
+Vector.resize(20);
+Vector[0] = 10;
+Vector.size();
+Vector.push_back(); // append to end of list
+Vector.emplace_back(argu...);
+Vector.emplace(Vector.begin() + n, argu...);
+```
+
+
+## HOW TO USE RANDOM
+```cpp
+#include <cstdlib> // Required for rand() and srand()
+#include <ctime>   // Required for time()
+
+srand(time(0)); // only need to do once in the beginning
+
+int random_num = rand();
+std::cout << "Random number (full range): " << random_num << std::endl;
+// Formula for range [min, max]: (rand() % (max - min + 1)) + min
+v1 = rand() % 100;         // v1 in the range 0 to 99
+v2 = rand() % 100 + 1;     // v2 in the range 1 to 100
+v3 = rand() % 30 + 1985;   // v3 in the range 1985-2014
+```
+
+## STRING MANIPULATION
+**Required Includes:** `#include <string>` (and `#include <cctype>` for `toupper`/`tolower`)
+| Function Name | Purpose | Example / Output |
+| :--- | :--- | :--- |
+| **`length()` / `size()`** | Returns the number of characters in the string. | `string s = "BPA"; s.length();` // *3* |
+| **`empty()`** | Returns `true` if length is 0. Faster than `length() == 0`. | `string s = ""; s.empty();` // *true* |
+| **`clear()`** | Wipes out all characters, making the string empty. | `string s = "BPA"; s.clear();` // *s is ""* |
+| **`resize(n, char)`** | Changes string length. Fills new space with `char`. | `string s = "BPA"; s.resize(5, '!');` // *s is "BPA!!"* |
+| **`at(index)`** | Safely gets the character at the index (throws error if out of bounds). | `string s = "BPA"; s.at(0);` // *'B'* |
+| **`front()` / `back()`** | Gets the very first or very last character. | `string s = "BPA"; s.back();` // *'A'* |
+| **`append()` / `+=`** | Adds a string to the end of the current string. | `string s = "Music"; s += " City";` // *s is "Music City"* |
+| **`push_back(char)`** | Adds a **single character** to the end. | `string s = "Apple"; s.push_back('s');` // *s is "Apples"* |
+| **`pop_back()`** | Deletes the **last character** of the string. | `string s = "Apples"; s.pop_back();` // *s is "Apple"* |
+| **`insert(pos, str)`** | Inserts a new string starting at the given index. | `string s = "BPA"; s.insert(1, "x");` // *s is "BxPA"* |
+| **`erase(pos, len)`** | Deletes a chunk of characters starting at `pos`. | `string s = "BPA"; s.erase(0, 1);` // *s is "PA"* |
+| **`replace(pos, len, str)`**| Swaps a chunk of length `len` at `pos` with `str`. | `string s = "BPA"; s.replace(0, 1, "C");` // *s is "CPA"* |
+| **`find(str)`** | Returns index of **first match**. Returns `string::npos` if not found. | `string s = "BPA"; s.find("P");` // *1* |
+| **`rfind(str)`** | Returns index of **last match** (Reverse Find). | `string s = "file.txt"; s.rfind(".");` // *4* |
+| **`find_first_of(str)`** | Finds first occurrence of **any character** in the provided string. | `string s = "BPA2026"; s.find_first_of("0123");` // *3* |
+| **`find_first_not_of(str)`**| Finds first occurrence of any character **NOT** in the string. | `string s = "  BPA"; s.find_first_not_of(" ");` // *2* |
+| **`substr(pos, len)`** | Extracts a sub-portion of the string. | `string s = "Nashville"; s.substr(0, 4);` // *"Nash"* |
+| **`std::to_string(num)`** | Converts an integer or double into a string. | `int n = 5; to_string(n);` // *"5"* |
+| **`std::stoi(str)`** | Converts a string into an integer (String To Int). | `string s = "10"; stoi(s);` // *10* |
+| **`std::stod(str)`** | Converts a string into a double (String To Double). | `string s = "3.14"; stod(s);` // *3.14* |
+| **`toupper(char)`** | Converts a single character to uppercase. | `char c = 'a'; toupper(c);` // *'A'* |
+| **`tolower(char)`** | Converts a single character to lowercase. | `char c = 'A'; tolower(c);` // *'a'* |
+
+
+## CHARACTER CHECKING
+`#include <cctype>`
+| Function | What it checks |
+| :--- | :--- |
+| **`isdigit(c)`** | Is it a number `0-9`? |
+| **`isalpha(c)`** | Is it a letter `a-z` or `A-Z`? |
+| **`isalnum(c)`** | Is it a letter OR a number? |
+| **`isspace(c)`** | Is it a space, tab, or newline? |
+| **`ispunct(c)`** | Is it puncuation like `!`, `-`, or `.`? |
+| **`isupper(c)`** | Is it an UPPERCASE letter? |
+
+
+## Formatting (`<iomanip>`)
+**Required Includes:** `#include <iomanip>` and `#include <iostream>` (or `<fstream>`)
+
+| Manipulator | Purpose | Example / Output |
+| :--- | :--- | :--- |
+| **`std::fixed`** | Forces decimal notation (prevents scientific notation). *(Sticky)* | `cout << fixed << 1000.0;` // *1000.000000* |
+| **`std::setprecision(n)`** | Sets the exact number of digits after the decimal point. *(Sticky)* | `cout << setprecision(2) << 3.14159;` // *3.14* |
+| **`std::setw(n)`** | Creates a box of `n` spaces for the **very next** item. *(Not Sticky)* | `cout << "[" << setw(5) << 42 << "]";` // *[   42]* |
+| **`std::left`** | Pushes the text to the left side of the `setw` box. *(Sticky)* | `cout << left << setw(5) << 42;` // *42   * |
+| **`std::right`** | Pushes the text to the right side of the `setw` box. *(Sticky)* | `cout << right << setw(5) << 42;` // * 42* |
+| **`std::setfill(char)`** | Changes the padding character used by `setw`. *(Sticky)* | `cout << setfill('0') << setw(4) << 5;` // *0005* |
+
+
+## HOW TO READ A CSV FILE
+```cpp
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <string>
+
+// Define a struct to hold a row of data, e.g., for data.csv: Name,Age,Occupation
+struct Person {
+    std::string name;
+    int age;
+    std::string occupation;
+};
+
+int main() {
+    std::ifstream file("data.csv"); // Open the CSV file
+    std::string line;
+    std::vector<Person> data; // Vector to store Person structs
+
+    // Check if the file opened successfully
+    if (!file.is_open()) {
+        std::cerr << "Error opening file!" << std::endl;
+        return 1;
+    }
+
+    // Skip the header line (optional, depending on your file)
+    std::getline(file, line);
+
+    // Read the file line by line
+    while (std::getline(file, line)) {
+        std::istringstream iss(line); // Create a string stream from the line
+        std::string word;
+        Person person;
+
+        // Extract data fields using the comma delimiter
+        std::getline(iss, person.name, ','); // Read name until the first comma
+        std::getline(iss, word, ',');       // Read age as a string
+        person.age = std::stoi(word);       // Convert age string to integer
+        std::getline(iss, person.occupation); // Read the rest of the line (occupation)
+
+        data.push_back(person); // Add the person struct to the vector
+    }
+    file.close(); // Close the file
+
+    // Display the parsed data
+    for (const auto& person : data) {
+        std::cout << "Name: " << person.name << ", Age: " << person.age
+                  << ", Occupation: " << person.occupation << std::endl;
+    }
+
+    return 0;
+}
+```
+
+
+## HEADER
+```cpp
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+
+int main() {
+    char exitInput;
+
+    do {
+        system("CLS");
+        
+        int menuNumber;
+        while (true) {
+            printf("Menu 1\nMenu 2\nMenu 3\nMenu 4\nWhat menu do you want? \n");
+            if (cin >> menuNumber && menuNumber >= 0) {
+                break;
+            }
+
+            cin.clear();
+            cin.ignore(1000, '\n');
+        }
+
+        switch (menuNumber) {
+            case 1:
+                printf("oh cool menu 1\n");
+                break;
+            case 2:
+                printf("oh cool menu 2\n");
+                break;
+            case 3:
+                printf("oh cool menu 3\n");
+                break;
+            case 4:
+                printf("oh cool menu 4\n");
+                break;
+            default:
+                printf("that isnt a menu number!\n");
+                break;
+        }
+
+        printf("Want to go again? (y/Y): ");
+        cin >> exitInput;
+    } while (exitInput == 'y' || exitInput == 'Y');
+
+    return 0;
+}
+```
+
+
+## FILE I/O
+```cpp
+std::ofstream outFile("marathonList.txt");
+    
+double totalAge = 0;
+double totalFees = 0;
+if (outFile.is_open()) {
+    for (Runner runner : runners) {
+       char buffer[128];
+        std::snprintf(buffer, sizeof(buffer), "%d | %s | %d | %s | %.2f\n", runner.getBib(), runner.getName().c_str(), runner.getAge(), runner.getCategory().c_str(), runner.getRegistrationFee());
+        outFile << buffer;
+
+        totalAge += runner.getAge();
+        totalFees += runner.getRegistrationFee();
+    }
+
+    char buffer[128];
+    std::snprintf(buffer, sizeof(buffer), "\nAverage age: %.2f\nTotal fees: %.2f", totalAge / runners.size(), totalFees);
+    outFile << buffer;
+
+    outFile.close();
+} else {
+    std::cerr << "Error: Could not open the file." << std::endl;
+}
+```

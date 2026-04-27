@@ -99,6 +99,7 @@ int main() {
 
         // make item and put it in the vector for later
         items.emplace_back(itemID, itemName, price, quantity);
+        items.emplace(items.begin() + 1, itemID, itemName, price, quantity);
 
         // ask user if they want to keep adding more items
         while(true) {
